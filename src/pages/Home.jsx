@@ -3,17 +3,17 @@ import api from "../config/api";
 import { Link } from "react-router-dom";
 
 export default function Home() {
-  const [posts, setPosts] = useState([]); // Todos os posts carregados
-  const [loading, setLoading] = useState(false); // Estado de carregamento
-  const [page, setPage] = useState(1); // Página atual para a requisição
+  const [posts, setPosts] = useState([]); 
+  const [loading, setLoading] = useState(false); 
+  const [page, setPage] = useState(1); 
 
   // Função para buscar dados
   const fetchData = async () => {
-    if (loading) return; // Evita que a requisição seja feita enquanto estiver carregando
+    if (loading) return;
     setLoading(true);
     try {
       const response = await api.get(`/posts?_page=${page}&_limit=10`);
-      setPosts((prevPosts) => [...prevPosts, ...response.data]); // Adiciona os posts ao estado
+      setPosts((prevPosts) => [...prevPosts, ...response.data]);
       setLoading(false);
     } catch (error) {
       console.error(error);
@@ -21,13 +21,13 @@ export default function Home() {
     }
   };
 
-  // Carregar posts iniciais
+
   useEffect(() => {
     fetchData();
   }, [page]);
 
   const handleLoadMore = () => {
-    setPage((prevPage) => prevPage + 1); // Incrementa a página ao clicar no botão
+    setPage((prevPage) => prevPage + 1); 
   };
 
   return (

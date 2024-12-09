@@ -3,25 +3,25 @@ import { useParams } from "react-router-dom";
 import api from "../config/api";
 
 export default function PostDetails() {
-  const { id } = useParams(); // Obtendo o ID do post da URL
-  const [post, setPost] = useState(null); // Inicializando o estado do post
+  const { id } = useParams(); 
+  const [post, setPost] = useState(null);
 
   // Função para buscar o post da API
   const fetchData = async () => {
     try {
       const response = await api.get(`/posts/${id}`);
-      setPost(response.data); // Atualizando o estado com os dados do post
+      setPost(response.data); 
     } catch (error) {
-      console.error("Erro ao carregar o post:", error); // Melhor mensagem de erro
+      console.error("Erro ao carregar o post:", error); 
     }
   };
 
-  // useEffect para chamar a função fetchData quando o id do post mudar
+ 
   useEffect(() => {
     fetchData();
   }, [id]);
 
-  // Exibindo uma mensagem enquanto o post não é carregado
+
   if (!post)
     return (
       <div className="text-center text-blue-500 mt-4">Carregando o post...</div>
